@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FixItHub - Your Home, Our Priority</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-house-chimney"></i></div>
+        <div class="logo-text">
+          <span class="logo-name">FixIt<span class="logo-accent">Hub</span></span>
+          <span class="logo-tagline">Your Home, Our Priority</span>
+        </div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#" class="active"><i class="fas fa-house"></i> Home</a></li>
+        <li><a href="#">Services</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <a href="tel:+91XXXXXXXXXX" class="btn-call">
+        <i class="fas fa-phone"></i> Call Us
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-container">
+      <div class="hero-left">
+        <div class="trusted-badge">
+          <i class="fas fa-circle-check"></i> Trusted by 1000+ Customers
+        </div>
+        <h1 class="hero-title">
+          Find Trusted<br>
+          <span class="hero-highlight">Home Services</span><br>
+          Near You 🏠
+        </h1>
+        <p class="hero-desc">
+          Get connected with verified and experienced professionals<br>
+          for all your home service needs.
+        </p>
+        <a href="#services" class="btn-explore">Explore Services <i class="fas fa-arrow-right"></i></a>
+      </div>
+      <div class="hero-right">
+       <img src="{{ url_for('static', filename='images/workers.png') }}" alt="Workers" class="hero-img"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="services" id="services">
+    <div class="section-container">
+      <h2 class="section-title">Choose a Service</h2>
+      <div class="title-underline"><span></span></div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon plumber-icon"><i class="fas fa-faucet-drip"></i></div>
+          <p class="service-name">Plumber</p>
+          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="service-card">
+          <div class="service-icon ac-icon"><i class="fas fa-snowflake"></i></div>
+          <p class="service-name">AC Repair</p>
+          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="service-card">
+          <div class="service-icon carpenter-icon"><i class="fas fa-hammer"></i></div>
+          <p class="service-name">Carpenter</p>
+          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="service-card">
+          <div class="service-icon electric-icon"><i class="fas fa-bolt"></i></div>
+          <p class="service-name">Electrician</p>
+          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="service-card">
+          <div class="service-icon water-icon"><i class="fas fa-droplet"></i></div>
+          <p class="service-name">Water Supply</p>
+          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="service-card">
+          <div class="service-icon clean-icon"><i class="fas fa-broom"></i></div>
+          <p class="service-name">Cleaning</p>
+          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="service-card">
+          <div class="service-icon iron-icon"><i class="fas fa-shirt"></i></div>
+          <p class="service-name">Iron Service</p>
+          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ADD WORKER -->
+  <section class="add-worker">
+    <div class="section-container">
+      <div class="worker-box">
+        <h2 class="worker-title">Add Worker 👷</h2>
+        <div class="worker-form">
+          <div class="input-group">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Worker Name" id="workerName"/>
+          </div>
+          <div class="input-group">
+            <i class="fas fa-phone"></i>
+            <input type="tel" placeholder="Phone Number" id="workerPhone"/>
+          </div>
+          <div class="input-group select-group">
+            <i class="fas fa-briefcase"></i>
+            <select id="workerService">
+              <option value="" disabled selected>Select Service</option>
+              <option value="plumber">Plumber</option>
+              <option value="ac_repair">AC Repair</option>
+              <option value="carpenter">Carpenter</option>
+              <option value="electrician">Electrician</option>
+              <option value="water_supply">Water Supply</option>
+              <option value="cleaning">Cleaning</option>
+              <option value="iron_service">Iron Service</option>
+            </select>
+            <i class="fas fa-chevron-down select-arrow"></i>
+          </div>
+          <button class="btn-add-worker" onclick="addWorker()">
+            <i class="fas fa-plus"></i> Add Worker
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST BAR -->
+  <section class="trust-bar">
+    <div class="trust-container">
+      <div class="trust-item">
+        <div class="trust-icon"><i class="fas fa-shield-halved"></i></div>
+        <div class="trust-text">
+          <span class="trust-title">Verified Professionals</span>
+          <span class="trust-sub">All workers are verified</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><i class="fas fa-star"></i></div>
+        <div class="trust-text">
+          <span class="trust-title">Quality Service</span>
+          <span class="trust-sub">We ensure best quality</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><i class="fas fa-clock"></i></div>
+        <div class="trust-text">
+          <span class="trust-title">On Time</span>
+          <span class="trust-sub">Always on time service</span>
+        </div>
+      </div>
+      <div class="trust-item">
+        <div class="trust-icon"><i class="fas fa-headset"></i></div>
+        <div class="trust-text">
+          <span class="trust-title">24/7 Support</span>
+          <span class="trust-sub">Always here for you</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function addWorker() {
+      const name    = document.getElementById('workerName').value.trim();
+      const phone   = document.getElementById('workerPhone').value.trim();
+      const service = document.getElementById('workerService').value;
+      if (!name || !phone || !service) { alert('Please fill all fields!'); return; }
+      fetch('/add_worker', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, phone, service })
+      })
+      .then(res => res.json())
+      .then(() => {
+        alert('Worker added successfully!');
+        document.getElementById('workerName').value = '';
+        document.getElementById('workerPhone').value = '';
+        document.getElementById('workerService').value = '';
+      })
+      .catch(() => alert('Error adding worker.'));
+    }
+  </script>
+
+</body>
+</html>

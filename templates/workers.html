@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Workers</title>
+    <!-- SAME LINE HERE -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<h1>{{ service }} Workers 👷</h1>
+
+{% if workers %}
+    {% for worker in workers %}
+        <p>
+            <strong>{{ worker[0] }}</strong><br>
+            📞 {{ worker[1] }} <br>
+            <a href="tel:{{ worker[1] }}">Call Now 📞</a>
+        </p>
+        <hr>
+    {% endfor %}
+{% else %}
+    <p>No workers available 😢</p>
+{% endif %}
+
+<br>
+<a href="/">⬅ Go Back</a>
+
+</body>
+</html>
