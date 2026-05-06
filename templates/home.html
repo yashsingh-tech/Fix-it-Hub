@@ -61,41 +61,41 @@
       <h2 class="section-title">Choose a Service</h2>
       <div class="title-underline"><span></span></div>
       <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon plumber-icon"><i class="fas fa-faucet-drip"></i></div>
-          <p class="service-name">Plumber</p>
-          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
-        </div>
-        <div class="service-card">
-          <div class="service-icon ac-icon"><i class="fas fa-snowflake"></i></div>
-          <p class="service-name">AC Repair</p>
-          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
-        </div>
-        <div class="service-card">
-          <div class="service-icon carpenter-icon"><i class="fas fa-hammer"></i></div>
-          <p class="service-name">Carpenter</p>
-          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
-        </div>
-        <div class="service-card">
-          <div class="service-icon electric-icon"><i class="fas fa-bolt"></i></div>
-          <p class="service-name">Electrician</p>
-          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
-        </div>
-        <div class="service-card">
-          <div class="service-icon water-icon"><i class="fas fa-droplet"></i></div>
-          <p class="service-name">Water Supply</p>
-          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
-        </div>
-        <div class="service-card">
-          <div class="service-icon clean-icon"><i class="fas fa-broom"></i></div>
-          <p class="service-name">Cleaning</p>
-          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
-        </div>
-        <div class="service-card">
-          <div class="service-icon iron-icon"><i class="fas fa-shirt"></i></div>
-          <p class="service-name">Iron Service</p>
-          <button class="service-arrow"><i class="fas fa-arrow-right"></i></button>
-        </div>
+       <a href="/workers/plumber" class="service-card">
+            <div class="service-icon plumber-icon"><i class="fas fa-faucet-drip"></i></div>
+            <p class="service-name">Plumber</p>
+            <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+          </a>
+       <a href="/workers/ac_repair" class="service-card">
+  <div class="service-icon ac-icon"><i class="fas fa-snowflake"></i></div>
+  <p class="service-name">AC Repair</p>
+  <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+</a>
+       <a href="/workers/carpenter" class="service-card">
+  <div class="service-icon carpenter-icon"><i class="fas fa-hammer"></i></div>
+  <p class="service-name">Carpenter</p>
+  <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+</a>
+       <a href="/workers/electrician" class="service-card">
+  <div class="service-icon electric-icon"><i class="fas fa-bolt"></i></div>
+  <p class="service-name">Electrician</p>
+  <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+</a>
+       <a href="/workers/water_supply" class="service-card">
+  <div class="service-icon water-icon"><i class="fas fa-droplet"></i></div>
+  <p class="service-name">Water Supply</p>
+  <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+</a>
+        <a href="/workers/cleaning" class="service-card">
+  <div class="service-icon clean-icon"><i class="fas fa-broom"></i></div>
+  <p class="service-name">Cleaning</p>
+  <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+</a>
+       <a href="/workers/iron_service" class="service-card">
+  <div class="service-icon iron-icon"><i class="fas fa-shirt"></i></div>
+  <p class="service-name">Iron Service</p>
+  <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+</a>
       </div>
     </div>
   </section>
@@ -176,19 +176,24 @@
       const phone   = document.getElementById('workerPhone').value.trim();
       const service = document.getElementById('workerService').value;
       if (!name || !phone || !service) { alert('Please fill all fields!'); return; }
-      fetch('/add_worker', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, service })
-      })
-      .then(res => res.json())
-      .then(() => {
-        alert('Worker added successfully!');
-        document.getElementById('workerName').value = '';
-        document.getElementById('workerPhone').value = '';
-        document.getElementById('workerService').value = '';
-      })
-      .catch(() => alert('Error adding worker.'));
+      const formData = new FormData();
+formData.append('name', name);
+formData.append('phone', phone);
+formData.append('service', service);
+
+fetch('/add_worker', {
+  method: 'POST',
+  body: formData
+})
+.then(res => {
+  if (res.ok || res.redirected) {
+    alert('Worker added successfully! ✅');
+    document.getElementById('workerName').value = '';
+    document.getElementById('workerPhone').value = '';
+    document.getElementById('workerService').value = '';
+  }
+})
+.catch(() => alert('Error adding worker.'))
     }
   </script>
 

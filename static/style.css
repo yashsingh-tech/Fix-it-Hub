@@ -108,3 +108,8 @@ body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg-page
   .hero-title { font-size: 30px; }
   .services-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+a.service-card {
+  text-decoration: none;
+  color: inherit;
+}
