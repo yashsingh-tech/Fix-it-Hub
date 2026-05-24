@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Booking Success - FixItHub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-house-chimney"></i></div>
+        <div class="logo-text">
+          <span class="logo-name">FixIt<span class="logo-accent">Hub</span></span>
+          <span class="logo-tagline">Your Home, Our Priority</span>
+        </div>
+      </div>
+      <a href="/" class="btn-call">
+        <i class="fas fa-house"></i> Home
+      </a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="section-container">
+      <div class="worker-box" style="max-width:500px; margin:40px auto; text-align:center;">
+
+        <div style="font-size:72px; margin-bottom:16px;">🎉</div>
+        <h2 class="worker-title">Booking Confirmed!</h2>
+        <p style="color:#6B7280; margin-bottom:32px;">
+          Your booking has been placed successfully!<br>
+          Worker will contact you soon.
+        </p>
+
+        <div style="background:#F0FDF4; border-radius:12px; padding:20px; margin-bottom:24px;">
+          <i class="fas fa-check-circle" style="font-size:32px; color:#22C55E;"></i>
+          <p style="color:#22C55E; font-weight:600; margin-top:8px;">Booking Successful! ✅</p>
+        </div>
+
+        <a href="/" class="btn-explore" style="width:100%; justify-content:center;">
+          <i class="fas fa-house"></i> Back to Home
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+</body>
+</html>
