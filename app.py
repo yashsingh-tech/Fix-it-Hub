@@ -18,6 +18,17 @@ def init_db():
             password TEXT
         )
     ''')
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS bookings (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            customer_name TEXT,
+            customer_phone TEXT,
+            customer_address TEXT,
+            service TEXT,
+            worker_id INTEGER,
+            status TEXT DEFAULT 'pending'
+        )
+    ''')
     conn.commit()
     conn.close()
 
