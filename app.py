@@ -34,22 +34,19 @@ def init_db():
 
 init_db()
 
-# Home page
 @app.route("/")
 def home():
     return render_template("home.html")
 
-# Show workers by service
 @app.route("/workers/<service>")
 def workers(service):
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
-    c.execute("SELECT name, phone FROM workers WHERE service=?", (service,))
+    c.execute("SELECT id, name, phone, service FROM workers WHERE service=?", (service,))
     data = c.fetchall()
     conn.close()
     return render_template("workers.html", workers=data, service=service)
 
-# Worker Register
 @app.route("/worker/register", methods=["GET", "POST"])
 def worker_register():
     if request.method == "POST":
@@ -67,7 +64,6 @@ def worker_register():
         return redirect("/worker/login")
     return render_template("worker_register.html")
 
-# Worker Login
 @app.route("/worker/login", methods=["GET", "POST"])
 def worker_login():
     if request.method == "POST":
@@ -88,7 +84,6 @@ def worker_login():
             return redirect("/worker/login")
     return render_template("worker_login.html")
 
-# Worker Dashboard
 @app.route("/worker/dashboard")
 def worker_dashboard():
     if 'worker_id' not in session:
@@ -127,13 +122,11 @@ def reject_booking(booking_id):
     conn.close()
     return redirect("/worker/dashboard")
 
-# Worker Logout
 @app.route("/worker/logout")
 def worker_logout():
     session.clear()
     return redirect("/")
 
-# Add worker (old route — ab bhi kaam karega)
 @app.route("/add_worker", methods=["POST"])
 def add_worker():
     name = request.form["name"]
@@ -147,11 +140,6 @@ def add_worker():
     conn.close()
     return redirect("/")
 
-if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=5000, debug=False)
-
-
-# Customer Booking
 @app.route("/book/<int:worker_id>", methods=["GET", "POST"])
 def book_worker(worker_id):
     if request.method == "POST":
@@ -174,7 +162,9 @@ def book_worker(worker_id):
     conn.close()
     return render_template("booking.html", worker=worker)
 
-# Booking Success
 @app.route("/booking_success")
 def booking_success():
-    return render_template("booking_success.html")    
+    return render_template("booking_success.html")
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000, debug=False)   
