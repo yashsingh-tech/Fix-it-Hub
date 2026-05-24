@@ -1,29 +1,61 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Workers</title>
-    <!-- SAME LINE HERE -->
+    <title>Workers - FixItHub</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 <body>
 
-<h1>{{ service }} Workers 👷</h1>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-house-chimney"></i></div>
+        <div class="logo-text">
+          <span class="logo-name">FixIt<span class="logo-accent">Hub</span></span>
+          <span class="logo-tagline">Your Home, Our Priority</span>
+        </div>
+      </div>
+      <a href="/" class="btn-call">
+        <i class="fas fa-house"></i> Home
+      </a>
+    </div>
+  </nav>
 
-{% if workers %}
-    {% for worker in workers %}
-        <p>
-            <strong>{{ worker[0] }}</strong><br>
-            📞 {{ worker[1] }} <br>
-            <a href="tel:{{ worker[1] }}">Call Now 📞</a>
-        </p>
-        <hr>
-    {% endfor %}
-{% else %}
-    <p>No workers available 😢</p>
-{% endif %}
+  <section class="services" style="padding: 40px 0;">
+    <div class="section-container">
+      <h2 class="section-title">{{ service | replace('_', ' ') | title }} Workers 👷</h2>
+      <div class="title-underline"><span></span></div>
 
-<br>
-<a href="/">⬅ Go Back</a>
+      {% if workers %}
+        <div class="services-grid" style="grid-template-columns: repeat(3, 1fr);">
+          {% for worker in workers %}
+            <div class="service-card" style="align-items:flex-start; padding:24px;">
+              <div class="service-icon plumber-icon">
+                <i class="fas fa-user-hard-hat"></i>
+              </div>
+              <p style="font-size:18px; font-weight:700;">{{ worker[1] }}</p>
+              <p style="color:#6B7280;"><i class="fas fa-phone"></i> {{ worker[2] }}</p>
+              <p style="color:#6B7280;"><i class="fas fa-briefcase"></i> {{ worker[3] | replace('_', ' ') | title }}</p>
+              <a href="/book/{{ worker[0] }}" class="btn-explore" style="margin-top:12px; padding:10px 20px; font-size:14px;">
+                <i class="fas fa-calendar-check"></i> Book Now
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div style="text-align:center; padding:60px;">
+          <i class="fas fa-user-slash" style="font-size:48px; color:#D1D5DB;"></i>
+          <p style="font-size:18px; color:#6B7280; margin-top:16px;">No workers available 😢</p>
+        </div>
+      {% endif %}
+
+      <div style="text-align:center; margin-top:32px;">
+        <a href="/" class="btn-call"><i class="fas fa-arrow-left"></i> Go Back</a>
+      </div>
+    </div>
+  </section>
 
 </body>
 </html>

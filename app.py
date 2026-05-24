@@ -119,3 +119,32 @@ def add_worker():
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=False)
+
+
+# Customer Booking
+@app.route("/book/<int:worker_id>", methods=["GET", "POST"])
+def book_worker(worker_id):
+    if request.method == "POST":
+        customer_name = request.form["customer_name"]
+        customer_phone = request.form["customer_phone"]
+        customer_address = request.form["customer_address"]
+        conn = sqlite3.connect('database.db')
+        c = conn.cursor()
+        c.execute("SELECT service FROM workers WHERE id=?", (worker_id,))
+        worker = c.fetchone()
+        c.execute("INSERT INTO bookings (customer_name, customer_phone, customer_address, service, worker_id) VALUES (?, ?, ?, ?, ?)",
+                  (customer_name, customer_phone, customer_address, worker[0], worker_id))
+        conn.commit()
+        conn.close()
+        return redirect("/booking_success")
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM workers WHERE id=?", (worker_id,))
+    worker = c.fetchone()
+    conn.close()
+    return render_template("booking.html", worker=worker)
+
+# Booking Success
+@app.route("/booking_success")
+def booking_success():
+    return render_template("booking_success.html")    
