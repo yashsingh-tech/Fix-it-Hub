@@ -93,9 +93,39 @@ def worker_login():
 def worker_dashboard():
     if 'worker_id' not in session:
         return redirect("/worker/login")
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute("SELECT * FROM bookings WHERE worker_id=?", (session['worker_id'],))
+    bookings = c.fetchall()
+    conn.close()
+    pending_count  = sum(1 for b in bookings if b[6] == 'pending')
+    accepted_count = sum(1 for b in bookings if b[6] == 'accepted')
+    rejected_count = sum(1 for b in bookings if b[6] == 'rejected')
     return render_template("worker_dashboard.html",
                            name=session['worker_name'],
-                           service=session['worker_service'])
+                           service=session['worker_service'],
+                           bookings=bookings,
+                           pending_count=pending_count,
+                           accepted_count=accepted_count,
+                           rejected_count=rejected_count)
+
+@app.route("/booking/accept/<int:booking_id>", methods=["POST"])
+def accept_booking(booking_id):
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute("UPDATE bookings SET status='accepted' WHERE id=?", (booking_id,))
+    conn.commit()
+    conn.close()
+    return redirect("/worker/dashboard")
+
+@app.route("/booking/reject/<int:booking_id>", methods=["POST"])
+def reject_booking(booking_id):
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute("UPDATE bookings SET status='rejected' WHERE id=?", (booking_id,))
+    conn.commit()
+    conn.close()
+    return redirect("/worker/dashboard")
 
 # Worker Logout
 @app.route("/worker/logout")
