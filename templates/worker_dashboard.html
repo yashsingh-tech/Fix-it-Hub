@@ -25,38 +25,82 @@
     </div>
   </nav>
 
-  <!-- DASHBOARD -->
-  <section class="hero">
+  <section class="services" style="padding:40px 0;">
     <div class="section-container">
-      <div class="worker-box" style="max-width:600px; margin: 40px auto;">
 
-        <h2 class="worker-title">Welcome, {{ name }}! 👋</h2>
-
-        <div style="text-align:center; margin-bottom:32px;">
-          <span style="background:#EFF6FF; color:#2563EB; padding:8px 20px; border-radius:100px; font-weight:600; font-size:15px;">
-            <i class="fas fa-briefcase"></i> {{ service | replace('_', ' ') | title }}
-          </span>
-        </div>
-
-        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px;">
-          <div style="background:#F0FDF4; border-radius:16px; padding:24px; text-align:center;">
-            <i class="fas fa-clock" style="font-size:32px; color:#22C55E;"></i>
-            <p style="font-size:24px; font-weight:700; margin:8px 0;">0</p>
-            <p style="color:#6B7280;">Pending Orders</p>
-          </div>
-          <div style="background:#EFF6FF; border-radius:16px; padding:24px; text-align:center;">
-            <i class="fas fa-check-circle" style="font-size:32px; color:#2563EB;"></i>
-            <p style="font-size:24px; font-weight:700; margin:8px 0;">0</p>
-            <p style="color:#6B7280;">Completed Orders</p>
-          </div>
-        </div>
-
-        <div style="margin-top:24px; background:#FFFBEB; border-radius:16px; padding:20px; text-align:center;">
-          <i class="fas fa-info-circle" style="color:#F59E0B;"></i>
-          <p style="color:#6B7280; margin-top:8px;">Booking system coming soon! Customers will be able to book you directly.</p>
-        </div>
-
+      <h2 class="section-title">Welcome, {{ name }}! 👋</h2>
+      <div style="text-align:center; margin-bottom:32px;">
+        <span style="background:#EFF6FF; color:#2563EB; padding:8px 20px; border-radius:100px; font-weight:600; font-size:15px;">
+          <i class="fas fa-briefcase"></i> {{ service | replace('_', ' ') | title }}
+        </span>
       </div>
+
+      <!-- STATS -->
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:40px;">
+        <div style="background:#FFFBEB; border-radius:16px; padding:24px; text-align:center;">
+          <i class="fas fa-clock" style="font-size:32px; color:#F59E0B;"></i>
+          <p style="font-size:28px; font-weight:700; margin:8px 0;">{{ pending_count }}</p>
+          <p style="color:#6B7280;">Pending</p>
+        </div>
+        <div style="background:#F0FDF4; border-radius:16px; padding:24px; text-align:center;">
+          <i class="fas fa-check-circle" style="font-size:32px; color:#22C55E;"></i>
+          <p style="font-size:28px; font-weight:700; margin:8px 0;">{{ accepted_count }}</p>
+          <p style="color:#6B7280;">Accepted</p>
+        </div>
+        <div style="background:#FEF2F2; border-radius:16px; padding:24px; text-align:center;">
+          <i class="fas fa-times-circle" style="font-size:32px; color:#EF4444;"></i>
+          <p style="font-size:28px; font-weight:700; margin:8px 0;">{{ rejected_count }}</p>
+          <p style="color:#6B7280;">Rejected</p>
+        </div>
+      </div>
+
+      <!-- BOOKINGS -->
+      <h3 style="font-size:22px; font-weight:700; margin-bottom:20px;">📋 Your Bookings</h3>
+
+      {% if bookings %}
+        <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:16px;">
+          {% for booking in bookings %}
+            <div class="service-card" style="align-items:flex-start; padding:24px;">
+
+              <div style="display:flex; justify-content:space-between; width:100%;">
+                <p style="font-size:17px; font-weight:700;">{{ booking[1] }}</p>
+                {% if booking[6] == 'pending' %}
+                  <span style="padding:4px 12px; border-radius:100px; font-size:12px; font-weight:600; background:#FFFBEB; color:#F59E0B;">Pending</span>
+                {% elif booking[6] == 'accepted' %}
+                  <span style="padding:4px 12px; border-radius:100px; font-size:12px; font-weight:600; background:#F0FDF4; color:#22C55E;">Accepted</span>
+                {% else %}
+                  <span style="padding:4px 12px; border-radius:100px; font-size:12px; font-weight:600; background:#FEF2F2; color:#EF4444;">Rejected</span>
+                {% endif %}
+              </div>
+
+              <p style="color:#6B7280; margin-top:8px;"><i class="fas fa-phone"></i> {{ booking[2] }}</p>
+              <p style="color:#6B7280;"><i class="fas fa-map-marker-alt"></i> {{ booking[3] }}</p>
+
+              {% if booking[6] == 'pending' %}
+                <div style="display:flex; gap:10px; margin-top:16px; width:100%;">
+                  <form method="POST" action="/booking/accept/{{ booking[0] }}" style="flex:1;">
+                    <button type="submit" style="width:100%; background:#22C55E; color:#fff; border:none; padding:10px; border-radius:8px; font-weight:600; cursor:pointer;">
+                      <i class="fas fa-check"></i> Accept
+                    </button>
+                  </form>
+                  <form method="POST" action="/booking/reject/{{ booking[0] }}" style="flex:1;">
+                    <button type="submit" style="width:100%; background:#EF4444; color:#fff; border:none; padding:10px; border-radius:8px; font-weight:600; cursor:pointer;">
+                      <i class="fas fa-times"></i> Reject
+                    </button>
+                  </form>
+                </div>
+              {% endif %}
+
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div style="text-align:center; padding:40px; background:#fff; border-radius:16px;">
+          <i class="fas fa-calendar-times" style="font-size:48px; color:#D1D5DB;"></i>
+          <p style="color:#6B7280; margin-top:16px;">No bookings yet!</p>
+        </div>
+      {% endif %}
+
     </div>
   </section>
 
