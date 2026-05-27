@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard - FixItHub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-house-chimney"></i></div>
+        <div class="logo-text">
+          <span class="logo-name">FixIt<span class="logo-accent">Hub</span></span>
+          <span class="logo-tagline">Your Home, Our Priority</span>
+        </div>
+      </div>
+      <div style="display:flex; gap:12px;">
+        <a href="/" class="btn-call" style="background:#6B7280;">
+          <i class="fas fa-house"></i> Home
+        </a>
+        <a href="/admin/logout" class="btn-call">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="services" style="padding:40px 0;">
+    <div class="section-container">
+
+      <h2 class="section-title">Admin Dashboard 📊</h2>
+      <div class="title-underline"><span></span></div>
+
+      <!-- STATS -->
+      <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:16px; margin-bottom:40px;">
+        <div style="background:#EFF6FF; border-radius:16px; padding:24px; text-align:center;">
+          <i class="fas fa-users" style="font-size:32px; color:#2563EB;"></i>
+          <p style="font-size:28px; font-weight:700; margin:8px 0;">{{ total_workers }}</p>
+          <p style="color:#6B7280;">Total Workers</p>
+        </div>
+        <div style="background:#F0FDF4; border-radius:16px; padding:24px; text-align:center;">
+          <i class="fas fa-calendar-check" style="font-size:32px; color:#22C55E;"></i>
+          <p style="font-size:28px; font-weight:700; margin:8px 0;">{{ total_bookings }}</p>
+          <p style="color:#6B7280;">Total Bookings</p>
+        </div>
+        <div style="background:#FFFBEB; border-radius:16px; padding:24px; text-align:center;">
+          <i class="fas fa-clock" style="font-size:32px; color:#F59E0B;"></i>
+          <p style="font-size:28px; font-weight:700; margin:8px 0;">{{ pending_bookings }}</p>
+          <p style="color:#6B7280;">Pending</p>
+        </div>
+        <div style="background:#F0FDF4; border-radius:16px; padding:24px; text-align:center;">
+          <i class="fas fa-check-circle" style="font-size:32px; color:#22C55E;"></i>
+          <p style="font-size:28px; font-weight:700; margin:8px 0;">{{ accepted_bookings }}</p>
+          <p style="color:#6B7280;">Accepted</p>
+        </div>
+        <div style="background:#FEF2F2; border-radius:16px; padding:24px; text-align:center;">
+          <i class="fas fa-times-circle" style="font-size:32px; color:#EF4444;"></i>
+          <p style="font-size:28px; font-weight:700; margin:8px 0;">{{ rejected_bookings }}</p>
+          <p style="color:#6B7280;">Rejected</p>
+        </div>
+      </div>
+
+      <!-- WORKERS TABLE -->
+      <h3 style="font-size:22px; font-weight:700; margin-bottom:16px;">👷 Registered Workers</h3>
+      {% if workers %}
+        <div style="background:#fff; border-radius:16px; overflow:hidden; border:1.5px solid #E5E7EB; margin-bottom:40px;">
+          <table style="width:100%; border-collapse:collapse;">
+            <thead>
+              <tr style="background:#EFF6FF;">
+                <th style="padding:14px 20px; text-align:left; color:#2563EB;">ID</th>
+                <th style="padding:14px 20px; text-align:left; color:#2563EB;">Name</th>
+                <th style="padding:14px 20px; text-align:left; color:#2563EB;">Phone</th>
+                <th style="padding:14px 20px; text-align:left; color:#2563EB;">Service</th>
+                <th style="padding:14px 20px; text-align:left; color:#2563EB;">Email</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for worker in workers %}
+                <tr style="border-top:1px solid #E5E7EB;">
+                  <td style="padding:14px 20px;">{{ worker[0] }}</td>
+                  <td style="padding:14px 20px; font-weight:600;">{{ worker[1] }}</td>
+                  <td style="padding:14px 20px;">{{ worker[2] }}</td>
+                  <td style="padding:14px 20px;">{{ worker[3] | replace('_', ' ') | title }}</td>
+                  <td style="padding:14px 20px;">{{ worker[4] }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div style="text-align:center; padding:40px; background:#fff; border-radius:16px; margin-bottom:40px;">
+          <p style="color:#6B7280;">No workers registered yet!</p>
+        </div>
+      {% endif %}
+
+      <!-- BOOKINGS TABLE -->
+      <h3 style="font-size:22px; font-weight:700; margin-bottom:16px;">📋 All Bookings</h3>
+      {% if bookings %}
+        <div style="background:#fff; border-radius:16px; overflow:hidden; border:1.5px solid #E5E7EB;">
+          <table style="width:100%; border-collapse:collapse;">
+            <thead>
+              <tr style="background:#EFF6FF;">
+                <th style="padding:14px 20px; text-align:left; color:#2563EB;">ID</th>
+                <th style="padding:14px 20px; text-align:left; color:#2563EB;">Customer</th>
+                <th style="padding:14px 20px; text-align:left; color:#2563EB;">Phone</th>
+                <th style="padding:14px 20px; text-align:left; color:#2563EB;">Address</th>
+                <th style="padding:14px 20px; text-align:left; color:#2563EB;">Service</th>
+                <th style="padding:14px 20px; text-align:left; color:#2563EB;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for booking in bookings %}
+                <tr style="border-top:1px solid #E5E7EB;">
+                  <td style="padding:14px 20px;">{{ booking[0] }}</td>
+                  <td style="padding:14px 20px; font-weight:600;">{{ booking[1] }}</td>
+                  <td style="padding:14px 20px;">{{ booking[2] }}</td>
+                  <td style="padding:14px 20px;">{{ booking[3] }}</td>
+                  <td style="padding:14px 20px;">{{ booking[4] | replace('_', ' ') | title }}</td>
+                  <td style="padding:14px 20px;">
+                    {% if booking[6] == 'pending' %}
+                      <span style="background:#FFFBEB; color:#F59E0B; padding:4px 12px; border-radius:100px; font-size:12px; font-weight:600;">Pending</span>
+                    {% elif booking[6] == 'accepted' %}
+                      <span style="background:#F0FDF4; color:#22C55E; padding:4px 12px; border-radius:100px; font-size:12px; font-weight:600;">Accepted</span>
+                    {% else %}
+                      <span style="background:#FEF2F2; color:#EF4444; padding:4px 12px; border-radius:100px; font-size:12px; font-weight:600;">Rejected</span>
+                    {% endif %}
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      {% else %}
+        <div style="text-align:center; padding:40px; background:#fff; border-radius:16px;">
+          <p style="color:#6B7280;">No bookings yet!</p>
+        </div>
+      {% endif %}
+
+    </div>
+  </section>
+
+</body>
+</html>

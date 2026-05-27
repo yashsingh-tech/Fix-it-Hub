@@ -166,5 +166,51 @@ def book_worker(worker_id):
 def booking_success():
     return render_template("booking_success.html")
 
+@app.route("/admin", methods=["GET", "POST"])
+def admin():
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+        if username == "yash" and password == "fixithub@123":
+            session['admin'] = True
+            return redirect("/admin")
+        else:
+            return render_template("admin_login.html", error="Wrong username or password!")
+    
+    if not session.get('admin'):
+        return render_template("admin_login.html", error="")
+    
+    conn = sqlite3.connect('database.db')
+    c = conn.cursor()
+    c.execute("SELECT COUNT(*) FROM workers")
+    total_workers = c.fetchone()[0]
+    c.execute("SELECT COUNT(*) FROM bookings")
+    total_bookings = c.fetchone()[0]
+    c.execute("SELECT COUNT(*) FROM bookings WHERE status='pending'")
+    pending_bookings = c.fetchone()[0]
+    c.execute("SELECT COUNT(*) FROM bookings WHERE status='accepted'")
+    accepted_bookings = c.fetchone()[0]
+    c.execute("SELECT COUNT(*) FROM bookings WHERE status='rejected'")
+    rejected_bookings = c.fetchone()[0]
+    c.execute("SELECT * FROM workers")
+    workers = c.fetchall()
+    c.execute("SELECT * FROM bookings")
+    bookings = c.fetchall()
+    conn.close()
+    return render_template("admin.html",
+                           total_workers=total_workers,
+                           total_bookings=total_bookings,
+                           pending_bookings=pending_bookings,
+                           accepted_bookings=accepted_bookings,
+                           rejected_bookings=rejected_bookings,
+                           workers=workers,
+                           bookings=bookings)
+
+@app.route("/admin/logout")
+def admin_logout():
+    session.pop('admin', None)
+    return redirect("/")
+
+
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000, debug=False)   
