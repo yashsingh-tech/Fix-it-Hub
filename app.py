@@ -15,7 +15,8 @@ def init_db():
             phone TEXT,
             service TEXT,
             email TEXT,
-            password TEXT
+            password TEXT,
+            address TEXT
         )
     ''')
     c.execute('''
@@ -54,11 +55,12 @@ def worker_register():
         phone = request.form["phone"]
         service = request.form["service"]
         email = request.form["email"]
+        address = request.form["address"]
         password = generate_password_hash(request.form["password"])
         conn = sqlite3.connect('database.db')
         c = conn.cursor()
-        c.execute("INSERT INTO workers (name, phone, service, email, password) VALUES (?, ?, ?, ?, ?)",
-                  (name, phone, service, email, password))
+        c.execute("INSERT INTO workers (name, phone, service, email, password, address) VALUES (?, ?, ?, ?, ?, ?)",
+                  (name, phone, service, email, password, address))
         conn.commit()
         conn.close()
         return redirect("/worker/login")
