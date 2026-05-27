@@ -76,6 +76,7 @@
                 <th style="padding:14px 20px; text-align:left; color:#2563EB;">Phone</th>
                 <th style="padding:14px 20px; text-align:left; color:#2563EB;">Service</th>
                 <th style="padding:14px 20px; text-align:left; color:#2563EB;">Email</th>
+                <th style="padding:14px 20px; text-align:left; color:#2563EB;">Address</th>
               </tr>
             </thead>
             <tbody>
@@ -86,6 +87,7 @@
                   <td style="padding:14px 20px;">{{ worker[2] }}</td>
                   <td style="padding:14px 20px;">{{ worker[3] | replace('_', ' ') | title }}</td>
                   <td style="padding:14px 20px;">{{ worker[4] }}</td>
+                  <td style="padding:14px 20px;">{{ worker[6] if worker[6] else 'N/A' }}</td>
                 </tr>
               {% endfor %}
             </tbody>

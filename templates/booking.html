@@ -34,6 +34,7 @@
           <p style="font-size:18px; font-weight:700; color:#1D4ED8;">{{ worker[1] }}</p>
           <p style="color:#6B7280;">{{ worker[3] | replace('_', ' ') | title }}</p>
           <p style="color:#6B7280;"><i class="fas fa-phone"></i> {{ worker[2] }}</p>
+          <p style="color:#6B7280;"><i class="fas fa-map-marker-alt"></i> {{ worker[6] if worker[6] else 'Address not provided' }}</p>
         </div>
 
         <form method="POST" action="/book/{{ worker[0] }}">
