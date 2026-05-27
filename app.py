@@ -44,6 +44,9 @@ def workers(service):
     conn = sqlite3.connect('database.db')
     c = conn.cursor()
     c.execute("SELECT id, name, phone, service, address FROM workers WHERE service=?", (service,))
+    data = c.fetchall()
+    conn.close()
+    return render_template("workers.html", workers=data, service=service)
 
 @app.route("/worker/register", methods=["GET", "POST"])
 def worker_register():
