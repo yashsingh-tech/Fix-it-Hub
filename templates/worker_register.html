@@ -30,14 +30,18 @@
     <div class="section-container">
       <div class="worker-box" style="max-width:500px; margin: 40px auto;">
         <h2 class="worker-title">Worker Register 👷</h2>
+        {% if error %}
+          <p class="form-error">{{ error }}</p>
+        {% endif %}
         <form method="POST" action="/worker/register">
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
           <div class="input-group" style="margin-bottom:16px;">
             <i class="fas fa-user"></i>
             <input type="text" name="name" placeholder="Full Name" required/>
           </div>
           <div class="input-group" style="margin-bottom:16px;">
             <i class="fas fa-phone"></i>
-            <input type="tel" name="phone" placeholder="Phone Number" required/>
+            <input type="tel" name="phone" placeholder="Phone Number" minlength="7" maxlength="20" required/>
           </div>
           <div class="input-group select-group" style="margin-bottom:16px;">
             <i class="fas fa-briefcase"></i>
@@ -63,7 +67,7 @@
           </div>
           <div class="input-group" style="margin-bottom:24px;">
             <i class="fas fa-lock"></i>
-            <input type="password" name="password" placeholder="Password" required/>
+            <input type="password" name="password" placeholder="Password" minlength="8" required/>
           </div>
           <button type="submit" class="btn-add-worker" style="width:100%; justify-content:center;">
             <i class="fas fa-user-plus"></i> Register

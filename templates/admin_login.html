@@ -31,6 +31,7 @@
         {% endif %}
 
         <form method="POST" action="/admin">
+          <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
           <div class="input-group" style="margin-bottom:16px;">
             <i class="fas fa-user"></i>
             <input type="text" name="username" placeholder="Username" required/>
