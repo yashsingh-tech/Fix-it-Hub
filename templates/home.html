@@ -9,7 +9,6 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-container">
       <div class="logo">
@@ -20,21 +19,20 @@
         </div>
       </div>
       <ul class="nav-links">
-        <li><a href="#" class="active"><i class="fas fa-house"></i> Home</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="/" class="active"><i class="fas fa-house"></i> Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#trust">About Us</a></li>
+        <li><a href="tel:+910000000000">Contact</a></li>
       </ul>
-      <a href="tel:+91XXXXXXXXXX" class="btn-call">
-  <i class="fas fa-phone"></i> Call Us
-</a>
-<a href="/worker/login" class="btn-call" style="background:#22C55E;">
-  <i class="fas fa-user"></i> Worker Login
-</a>
+      <a href="tel:+910000000000" class="btn-call">
+        <i class="fas fa-phone"></i> Call Us
+      </a>
+      <a href="/worker/login" class="btn-call btn-worker-login">
+        <i class="fas fa-user"></i> Worker Login
+      </a>
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-container">
       <div class="hero-left">
@@ -44,7 +42,7 @@
         <h1 class="hero-title">
           Find Trusted<br>
           <span class="hero-highlight">Home Services</span><br>
-          Near You 🏠
+          Near You
         </h1>
         <p class="hero-desc">
           Get connected with verified and experienced professionals<br>
@@ -53,94 +51,73 @@
         <a href="#services" class="btn-explore">Explore Services <i class="fas fa-arrow-right"></i></a>
       </div>
       <div class="hero-right">
-       <img src="{{ url_for('static', filename='images/workers.png') }}" alt="Workers" class="hero-img"/>
+        <img src="{{ url_for('static', filename='images/workers.png') }}" alt="Home service professionals" class="hero-img"/>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
   <section class="services" id="services">
     <div class="section-container">
       <h2 class="section-title">Choose a Service</h2>
       <div class="title-underline"><span></span></div>
       <div class="services-grid">
-       <a href="/workers/plumber" class="service-card">
-            <div class="service-icon plumber-icon"><i class="fas fa-faucet-drip"></i></div>
-            <p class="service-name">Plumber</p>
-            <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
-          </a>
-       <a href="/workers/ac_repair" class="service-card">
-  <div class="service-icon ac-icon"><i class="fas fa-snowflake"></i></div>
-  <p class="service-name">AC Repair</p>
-  <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
-</a>
-       <a href="/workers/carpenter" class="service-card">
-  <div class="service-icon carpenter-icon"><i class="fas fa-hammer"></i></div>
-  <p class="service-name">Carpenter</p>
-  <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
-</a>
-       <a href="/workers/electrician" class="service-card">
-  <div class="service-icon electric-icon"><i class="fas fa-bolt"></i></div>
-  <p class="service-name">Electrician</p>
-  <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
-</a>
-       <a href="/workers/water_supply" class="service-card">
-  <div class="service-icon water-icon"><i class="fas fa-droplet"></i></div>
-  <p class="service-name">Water Supply</p>
-  <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
-</a>
+        <a href="/workers/plumber" class="service-card">
+          <div class="service-icon plumber-icon"><i class="fas fa-faucet-drip"></i></div>
+          <p class="service-name">Plumber</p>
+          <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="/workers/ac_repair" class="service-card">
+          <div class="service-icon ac-icon"><i class="fas fa-snowflake"></i></div>
+          <p class="service-name">AC Repair</p>
+          <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="/workers/carpenter" class="service-card">
+          <div class="service-icon carpenter-icon"><i class="fas fa-hammer"></i></div>
+          <p class="service-name">Carpenter</p>
+          <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="/workers/electrician" class="service-card">
+          <div class="service-icon electric-icon"><i class="fas fa-bolt"></i></div>
+          <p class="service-name">Electrician</p>
+          <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="/workers/water_supply" class="service-card">
+          <div class="service-icon water-icon"><i class="fas fa-droplet"></i></div>
+          <p class="service-name">Water Supply</p>
+          <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
         <a href="/workers/cleaning" class="service-card">
-  <div class="service-icon clean-icon"><i class="fas fa-broom"></i></div>
-  <p class="service-name">Cleaning</p>
-  <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
-</a>
-       <a href="/workers/iron_service" class="service-card">
-  <div class="service-icon iron-icon"><i class="fas fa-shirt"></i></div>
-  <p class="service-name">Iron Service</p>
-  <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
-</a>
+          <div class="service-icon clean-icon"><i class="fas fa-broom"></i></div>
+          <p class="service-name">Cleaning</p>
+          <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a href="/workers/iron_service" class="service-card">
+          <div class="service-icon iron-icon"><i class="fas fa-shirt"></i></div>
+          <p class="service-name">Iron Service</p>
+          <span class="service-arrow"><i class="fas fa-arrow-right"></i></span>
+        </a>
       </div>
     </div>
   </section>
 
-  <!-- ADD WORKER -->
   <section class="add-worker">
     <div class="section-container">
       <div class="worker-box">
-        <h2 class="worker-title">Add Worker 👷</h2>
-        <div class="worker-form">
-          <div class="input-group">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Worker Name" id="workerName"/>
-          </div>
-          <div class="input-group">
-            <i class="fas fa-phone"></i>
-            <input type="tel" placeholder="Phone Number" id="workerPhone"/>
-          </div>
-          <div class="input-group select-group">
-            <i class="fas fa-briefcase"></i>
-            <select id="workerService">
-              <option value="" disabled selected>Select Service</option>
-              <option value="plumber">Plumber</option>
-              <option value="ac_repair">AC Repair</option>
-              <option value="carpenter">Carpenter</option>
-              <option value="electrician">Electrician</option>
-              <option value="water_supply">Water Supply</option>
-              <option value="cleaning">Cleaning</option>
-              <option value="iron_service">Iron Service</option>
-            </select>
-            <i class="fas fa-chevron-down select-arrow"></i>
-          </div>
-          <button class="btn-add-worker" onclick="addWorker()">
-            <i class="fas fa-plus"></i> Add Worker
-          </button>
+        <h2 class="worker-title">Join FixItHub as a Worker</h2>
+        <p class="worker-subtitle">Create a verified worker account so customers can book you and you can manage requests from your dashboard.</p>
+        <div class="cta-actions">
+          <a href="/worker/register" class="btn-add-worker">
+            <i class="fas fa-user-plus"></i> Register as Worker
+          </a>
+          <a href="/worker/login" class="btn-call cta-secondary">
+            <i class="fas fa-sign-in-alt"></i> Worker Login
+          </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TRUST BAR -->
-  <section class="trust-bar">
+  <section class="trust-bar" id="trust">
     <div class="trust-container">
       <div class="trust-item">
         <div class="trust-icon"><i class="fas fa-shield-halved"></i></div>
@@ -172,33 +149,6 @@
       </div>
     </div>
   </section>
-
-  <script>
-    function addWorker() {
-      const name    = document.getElementById('workerName').value.trim();
-      const phone   = document.getElementById('workerPhone').value.trim();
-      const service = document.getElementById('workerService').value;
-      if (!name || !phone || !service) { alert('Please fill all fields!'); return; }
-      const formData = new FormData();
-formData.append('name', name);
-formData.append('phone', phone);
-formData.append('service', service);
-
-fetch('/add_worker', {
-  method: 'POST',
-  body: formData
-})
-.then(res => {
-  if (res.ok || res.redirected) {
-    alert('Worker added successfully! ✅');
-    document.getElementById('workerName').value = '';
-    document.getElementById('workerPhone').value = '';
-    document.getElementById('workerService').value = '';
-  }
-})
-.catch(() => alert('Error adding worker.'))
-    }
-  </script>
 
 </body>
 </html>
