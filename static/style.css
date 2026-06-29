@@ -70,6 +70,11 @@ img { max-width: 100%; }
 .water-icon     { background: #EFF6FF; color: #38BDF8; }
 .clean-icon     { background: #F0FDF4; color: #22C55E; }
 .iron-icon      { background: #F5F3FF; color: #7C3AED; }
+.ro-icon        { background: #EFF6FF; color: #0EA5E9; }
+.painting-icon  { background: #FDF2F8; color: #EC4899; }
+.ceiling-icon   { background: #F0F9FF; color: #0284C7; }
+.tile-icon      { background: #FEF3C7; color: #D97706; }
+.movers-icon    { background: #ECFDF5; color: #059669; }
 .service-name { font-size: 14px; font-weight: 600; text-align: center; }
 .service-arrow { width: 32px; height: 32px; border-radius: 50%; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); display: flex; align-items: center; justify-content: center; font-size: 13px; cursor: pointer; transition: background 0.2s, color 0.2s; }
 .service-arrow:hover { background: var(--primary); color: #fff; }
