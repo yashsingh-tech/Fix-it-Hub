@@ -28,7 +28,12 @@ SERVICES = {
     "water_supply": "Water Supply",
     "cleaning": "Cleaning",
     "iron_service": "Iron Service",
-}
+    "ro_service": "RO Service",
+    "painting": "Painting Service",
+    "false_ceiling": "False Ceiling / POP",
+    "tile_marble": "Tile / Marble Work",
+    "packers_movers": "Packers & Movers",
+    }
 
 PHONE_RE = re.compile(r"^[0-9+\-\s()]{7,20}$")
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
