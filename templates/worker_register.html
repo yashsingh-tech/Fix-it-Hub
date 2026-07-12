@@ -9,7 +9,6 @@
 </head>
 <body>
 
-  <!-- NAVBAR -->
   <nav class="navbar">
     <div class="nav-container">
       <div class="logo">
@@ -25,13 +24,12 @@
     </div>
   </nav>
 
-  <!-- REGISTER FORM -->
   <section class="hero">
     <div class="section-container">
       <div class="worker-box" style="max-width:500px; margin: 40px auto;">
         <h2 class="worker-title">Worker Register 👷</h2>
         {% if error %}
-          <p class="form-error">{{ error }}</p>
+          <p style="color:red; text-align:center; margin-bottom:16px;">⚠️ {{ error }}</p>
         {% endif %}
         <form method="POST" action="/worker/register">
           <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
@@ -41,12 +39,12 @@
           </div>
           <div class="input-group" style="margin-bottom:16px;">
             <i class="fas fa-phone"></i>
-            <input type="tel" name="phone" placeholder="Phone Number" minlength="7" maxlength="20" required/>
+            <input type="tel" name="phone" placeholder="Phone Number (e.g. 9876543210)" minlength="7" maxlength="20" required/>
           </div>
           <div class="input-group select-group" style="margin-bottom:16px;">
             <i class="fas fa-briefcase"></i>
             <select name="service" required>
-               <option value="" disabled selected>Select Service</option>
+              <option value="" disabled selected>Select Service</option>
               <option value="plumber">Plumber</option>
               <option value="ac_repair">AC Repair</option>
               <option value="carpenter">Carpenter</option>
@@ -63,16 +61,12 @@
             <i class="fas fa-chevron-down select-arrow"></i>
           </div>
           <div class="input-group" style="margin-bottom:16px;">
-            <i class="fas fa-envelope"></i>
-            <input type="email" name="email" placeholder="Email Address" required/>
-          </div>
-          <div class="input-group" style="margin-bottom:16px;">
             <i class="fas fa-map-marker-alt"></i>
             <input type="text" name="address" placeholder="Your Area/Address (e.g. Vaishali Nagar, Jaipur)" required/>
           </div>
           <div class="input-group" style="margin-bottom:24px;">
             <i class="fas fa-lock"></i>
-            <input type="password" name="password" placeholder="Password" minlength="8" required/>
+            <input type="password" name="password" placeholder="Password (min 4 digits)" minlength="4" required/>
           </div>
           <button type="submit" class="btn-add-worker" style="width:100%; justify-content:center;">
             <i class="fas fa-user-plus"></i> Register
